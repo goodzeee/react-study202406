@@ -3,6 +3,7 @@ import './App.css';
 import ExpenseList from './components/expenses/ExpenseList';
 import Greet from './components/Greet';
 import Counter from './components/practice/Counter';
+import NewExpense from './components/new-expense/NewExpense';
 
 // 태그를 추가하여 넣는
 
@@ -50,16 +51,8 @@ const App = () => {
       {/* <Hello />
     <Bye />
     <Greet /> */}
-      <Counter />
+      <NewExpense />
       <ExpenseList expenses = {expenses}/>
-
-      {/* <Greet>
-        <ol>
-          <li>one</li>
-          <li>two</li>
-          <li>three</li>
-        </ol>
-      </Greet> */}
 
     </>
   );

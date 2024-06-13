@@ -4,6 +4,7 @@ import ExpenseList from './components/expenses/ExpenseList';
 import Greet from './components/Greet';
 import Counter from './components/practice/Counter';
 import NewExpense from './components/new-expense/NewExpense';
+import CheckBoxStyle from './components/practice/CheckBoxStyle';
 
 // 태그를 추가하여 넣는
 
@@ -38,6 +39,15 @@ const App = () => {
     },
   ];
 
+  // ExpenseForm에게 내려보낼 함수
+  const onAddExpense = (userInput) => {
+    console.log('App.js가 내려보낸 함수 호출 !');
+    //console.log(userInput);
+
+    expenses.push(userInput);
+    console.log(expenses);
+  };
+
   return (
     <>
       {/* <div className="App">
@@ -51,7 +61,8 @@ const App = () => {
       {/* <Hello />
     <Bye />
     <Greet /> */}
-      <NewExpense />
+      {/* <CheckBoxStyle /> */}
+      <NewExpense onSave={onAddExpense}/>
       <ExpenseList expenses = {expenses}/>
 
     </>

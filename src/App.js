@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import ExpenseList from './components/expenses/ExpenseList';
 import Greet from './components/Greet';
@@ -30,22 +30,38 @@ const App = () => {
     {
       title: "떡튀순세트",
       price: 6000,
-      date: new Date(2024, 6 -1, 11),
+      date: new Date(2023, 4 -1, 21),
     },
     {
       title: "버블티",
       price: 4500,
-      date: new Date(2024, 6 -1, 11),
+      date: new Date(2024, 3 -1, 11),
+    },
+    // 배열에다 추가하면 자동 렌더링 되게 - 동적 전달 !
+    {
+      title: "이토준지 티켓 예매",
+      price: 17500,
+      date: new Date(2024, 6 -1, 7),
     },
   ];
 
+  // expenses -> expenseList 로 관리하기 위한 변경
+  // 배열을 상태변수로 관리
+  const [expenseList, setExpenseList] = useState(expenses);
+
   // ExpenseForm에게 내려보낼 함수
+  // 리팩토링 - setExpenseList([...expenseList, userInput])
   const onAddExpense = (userInput) => {
     console.log('App.js가 내려보낸 함수 호출 !');
     //console.log(userInput);
 
-    expenses.push(userInput);
-    console.log(expenses);
+    expenseList.push(userInput);
+    // ⭐복사해서 setter에 새롭게 넣어주기 
+    const newExpenseList = [...expenseList];
+    //console.log(expenseList);
+
+    setExpenseList(newExpenseList);
+
   };
 
   return (
@@ -63,7 +79,7 @@ const App = () => {
     <Greet /> */}
       {/* <CheckBoxStyle /> */}
       <NewExpense onSave={onAddExpense}/>
-      <ExpenseList expenses = {expenses}/>
+      <ExpenseList expenses = {expenseList}/>
 
     </>
   );

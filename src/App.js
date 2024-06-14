@@ -93,14 +93,55 @@ import CourseInput from './components/CourseGoals/CourseInput';
 import CourseList from './components/CourseGoals/CourseList';
 import './App.css';
 
+// 기본 더미 데이터 - 목표 2개 넣어놓고 시작
+// 더미 데이터 li - CourseList에 보내기
+const DUMMY_DATA = [
+  {
+    id: 'g1',
+    text: '리액트 컴포넌트 스타일링 마스터하기'
+  },
+  {
+    id: 'g2',
+    text: 'UI/UX 프로그래밍 고수되기'
+  },
+]
+
 const App = () => {
+
+  // 상태값으로 관리하기 초기값 - 세팅된 값
+  const [goals, setGoals] = useState(DUMMY_DATA);
+
+  const addGoalHandler = (goalObject) => {
+    setGoals([...goals, goalObject]);
+  };
+
+  // CourseItem에게 상향식으로 데이터 전달할 함수 - id로 삭제 처리
+  const deleteGoalHandler = (id) => {
+    // console.log('id: ', id);
+
+    let index = -1;
+    for (let i = 0; i < goals.length; i++) {
+      if (goals[i].id === id) {
+        index = i;
+        break;
+      }
+    }
+    // console.log('index: ', index);
+
+    goals.splice(index, 1);
+
+    setGoals([...goals]);
+  };
+
+
   return (
     <div>
       <section id="goal-form">
-        <CourseInput />
+        <CourseInput onAdd={addGoalHandler}/>
       </section>
+
       <section id="goals">
-        <CourseList />
+        <CourseList items={goals} onDelete={deleteGoalHandler}/>
       </section>
     </div>
   );

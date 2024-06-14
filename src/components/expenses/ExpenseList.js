@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ExpenseItem from "./ExpenseItem";
 import ExpenseFilter from "./ExpenseFilter";
+import './ExpenseList.css';
 
 
 const ExpenseList = ({ expenses }) => {
@@ -26,22 +27,30 @@ const ExpenseList = ({ expenses }) => {
   //     return mappedArray;
   // };
 
+  // 연도로 필터링한 배열 - 변수로 빼내서 return 하려고
+  const filteredExpenses = expenses.filter(ex => ex.date.getFullYear().toString() === filteredYear)
+
+  // 지출 데이터가 있을 때 보여줄 태그
+  const expenseContent = filteredExpenses
+  .map(({ title, price, date }) => (
+  <ExpenseItem
+   key={Math.random().toString()}
+   title={title}
+   price={price}
+   date={date}
+   />
+ ));
+
+ // 지출 데이터가 없을 때 보여줄 태그
+ const noContent = <p>해당 연도에 지출 항목이 없습니다.</p>
+
   return (
     <div className="expenses">
       {/* {[<h1>하하호호</h1>, <h2>룰루랄라</h2>]} */}
 
       <ExpenseFilter onFilter={onFilterChange} />
 
-      {expenses
-        .filter(ex => ex.date.getFullYear().toString() === filteredYear)
-        .map(({ title, price, date }) => (
-        <ExpenseItem
-          key={Math.random().toString()}
-          title={title}
-          price={price}
-          date={date}
-          />
-        ))}
+      {filteredExpenses.length > 0 ? expenseContent : noContent}
       </div>
     );
   };

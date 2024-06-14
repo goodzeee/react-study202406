@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ExpenseForm.css';
 
-const ExpenseForm = ({ onAdd }) => {
+const ExpenseForm = ({ onAdd, onCancel }) => {
 
   // 입력칸에 있는 3개의 값을 ⭐단일 상태값으로 관리 - 초기값 넣어주기
   // const [title, setTitle] = useState('');
@@ -83,6 +83,13 @@ const ExpenseForm = ({ onAdd }) => {
 
   };
 
+  // 체크상태를 관리
+  const [isChecked, setIsChecked] = useState(false);
+
+  const cancelCliked = e => {
+    setIsChecked(!isChecked);
+  };
+
   return (
     <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
@@ -112,6 +119,7 @@ const ExpenseForm = ({ onAdd }) => {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button type="button" onClick={onCancel}>Cancel</button>
         <button type="submit">Add Expense</button>
       </div>
     </form>

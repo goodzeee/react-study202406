@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ExpenseItem from "./ExpenseItem";
 import ExpenseFilter from "./ExpenseFilter";
 import './ExpenseList.css';
+import ExpenseChart from "../chart/ExpenseChart";
 
 
 const ExpenseList = ({ expenses }) => {
@@ -49,6 +50,7 @@ const ExpenseList = ({ expenses }) => {
       {/* {[<h1>하하호호</h1>, <h2>룰루랄라</h2>]} */}
 
       <ExpenseFilter onFilter={onFilterChange} />
+      <ExpenseChart expenses={filteredExpenses}/>
 
       {filteredExpenses.length > 0 ? expenseContent : noContent}
       </div>
